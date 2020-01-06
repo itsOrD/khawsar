@@ -1,4 +1,8 @@
 import React from 'react';
+import Title from './Title.jsx';
+import Message from './Message.jsx';
+import Search from './Search.jsx';
+import Button from '@material-ui/core/Button';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +19,12 @@ class App extends React.Component {
     
     return (
       <div>
-        placeholder...
+        <Title />
+        <Message />
+        <Search />
+        <Button variant="contained" color="primary">
+          Search for a Pokémon!
+        </Button>
       </div>
     )
   }
