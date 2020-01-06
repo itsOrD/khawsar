@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const controller = require('../db/controllers/pimC.js');
+const pAPIcontrol = require('./controllers/pokeApi.js')
 
 const app = express();
 const PORT = 80;
@@ -21,7 +22,10 @@ app.route('/pim/read', controller.findPim);
 app.route('/pim/update', controller.editPim);
 
 // DELETE
-app.route('pim/delete', controller.deletePim);
+app.route('/pim/delete', controller.deletePim);
+
+// api routes
+app.route('/api/find', controller)
 
 app.listen(PORT, () => 
 	console.log('KHAWSAR listening on PORT: ', PORT)
