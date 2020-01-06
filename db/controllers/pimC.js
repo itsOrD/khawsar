@@ -8,8 +8,11 @@ const addPim = (data) => {
   });
 };
 
-const findPim = (data) => {
-
+const findPim = (req, res, next) => {
+  Pim.find(data, (err) => {
+    if (err) return next(err);
+    res.send(data)
+  })
 }
 
 const editPim = (data) => {

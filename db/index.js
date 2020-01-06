@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/khawsar');
+const mURI = 'mongodb://localhost:27017/khawsar';
 
-const db = mongoose.connection;
+const db = mongoose.connect(mURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-db.on('err', () => console.log('mongoose conn err'));
-
-db.once('open', () => console.log('mongoose conn success!'));
+db
+  .then(db => console.log(`Connected to: '${mURI}'`))
+	.catch(err => console.log(`Error connecting to '${mURI}': ${err}`))
 
 module.exports = db;
