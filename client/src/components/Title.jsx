@@ -26,29 +26,3 @@ const Title = () => {
 };
 
 export default Title;
-
-
-
-
-  // {/* <Card style={{ textAlign: 'center', color: '#FF8C00' }}>
-  //   <CardHeader
-  //     title="Search and Send"
-  //   >
-  //   </CardHeader>
-  //   <CardSubHeader>
-  //     A Pokemon image sharing app
-  //   </CardSubHeader>
-  // </Card> */}
-
-
-//   <div>
-//   <AppBar color="primary" position="static">
-//     <Toolbar>
-//       <TypoGraphy variant="title"
-//         color="inherit"
-//       >
-//         Search and Send
-//       </TypoGraphy>
-//     </Toolbar>
-//   </AppBar>
-// </div>

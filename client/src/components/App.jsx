@@ -32,12 +32,9 @@ class App extends React.Component {
     
     return (
       <div>
-        <Title  theme={theme} />
+        <Title />
         <Message />
         <Search />
-        <Button variant="contained" color="primary">
-          Search for a Pokémon!
-        </Button>
       </div>
     )
   }
