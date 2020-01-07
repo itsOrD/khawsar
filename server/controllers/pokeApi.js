@@ -8,7 +8,8 @@ const search = (req, res) => {
   //   success: () => res.send(data),
   //   failure: () => res.sendStatus(404)
   // })
-  axios.get(`https://pokeapi.co/api/v2/pokemon-form/machamp`)
+  console.log('incoming request ---> ', req)
+  axios.get(`https://pokeapi.co/api/v2/pokemon-form/`)
     .then((res) => {
       console.log(res.data);
       let foundPokemon = res.data;

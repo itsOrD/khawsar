@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import Guess from './Guess.jsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -9,6 +10,7 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { purple } from '@material-ui/core/colors';
+import Grid from '@material-ui/core/Grid';
 
 class Search extends React.Component {
   constructor(props) {
@@ -20,10 +22,14 @@ class Search extends React.Component {
       randomPokemon: 'Charmander',
       whoThat: [],
       pokeImg: '',
+      pokeData: '',
+      userGuessed: false,
+      userGuess: '',
+      userCorrect: '',
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.pokedex = this.pokedex.bind(this);
+    this.pokedexCheck = this.pokedexCheck.bind(this);
     this.oops = this.oops.bind(this);
     this.wildPokemonAppeared = this.wildPokemonAppeared.bind(this);
   }
@@ -31,20 +37,25 @@ class Search extends React.Component {
   wildPokemonAppeared(data) {
     console.log('data on client side: ', data)
     this.setState({
-      whoThat: data,
+      pokeData: data,
+      whoThat: data.name,
       pokeImg: data.sprites.front_shiny
     }, () => console.log(`whoThat?  Why its... ${this.state.whoThat.name}! ${this.state.pokeImg}`))
   }
+
+  // componentDidMount() {
+  //   this.wildPokemonAppeared(Math.floor(Math.random() * 807));
+  // }
 
   oops() {
     alert(`Please try again. Professor Oak has added that Pokémon to the Pokédex yet it would seem...`)
   }
 
-  pokedex(pocketMonster) {
+  pokedexCheck(pokeCheck) {
     $.ajax({
       type: "GET",
       url: "/api/find",
-      body: pocketMonster,
+      body: pokeCheck,
       success: (data) => this.wildPokemonAppeared(data),
       failure: () => oops(),
     })
@@ -59,45 +70,48 @@ class Search extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const pokeReq = this.state.pokeSearch;
-    console.log('before: ', pokeReq)
     this.setState({
       pokeSearch: '',
-    }, () => this.pokedex());
+      userGuessed: true,
+      userGuess: e.target.value,
+    }, () => this.pokedexCheck(this.state.userGuess));
   };
 
   render() {
-    const { randomPokemon, pokeSearch, whoThat, pokeImg } = this.state;
+    const { randomPokemon, pokeSearch, whoThat, pokeImg, userCorrect, userGuess, userGuessed } = this.state;
     const { handleChange, handleSubmit } = this;
     return (
-      <Card>
-        <CardHeader title="Who's that pokemon?!" />
-        <div>
-        <CardMedia image={pokeImg} style={{ height: 100, width: 100 }}></CardMedia>
-        </div>
-        <CardContent>
-        <form id="searchForm" onSubmit={handleSubmit}>
-          <TextField 
-            id="pokeSearch"
-            value={pokeSearch}
-            label="pokeStart here!"
-            type="search"
-            variant="outlined"
-            helperText={`How about... ${randomPokemon}?`}
-            onChange={handleChange}
-          />
-            <Button 
-              variant="contained"
-              color="primary"
-              style={{ marginTop: 10, marginLeft: 10 }}
-              type="submit"
-              form="searchForm"
-            >
-              Search for a Pokémon!
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+      <div>
+        <Card>
+          <CardHeader title="Who's that Pokémon?!" />
+          <Grid container justify="center">
+            <CardMedia image={pokeImg} style={{ height: 136, width: 111 }}></CardMedia>
+          </Grid>
+          <CardContent>
+            <form id="searchForm" onSubmit={handleSubmit}>
+              <TextField 
+                id="pokeSearch"
+                value={pokeSearch}
+                label="pokeStart here!"
+                type="search"
+                variant="outlined"
+                helperText={`How about... ${randomPokemon}?`}
+                onChange={handleChange}
+              />
+              <Button 
+                variant="contained"
+                color="primary"
+                style={{ marginTop: 10, marginLeft: 10 }}
+                type="submit"
+                form="searchForm"
+              >
+                Submit your guess!
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+        <Guess userGuessed={userGuessed} userGuess={userGuess} userCorrect={userCorrect} />
+      </div>
     )
   }
 };
