@@ -9,8 +9,8 @@ const Title = () => {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <TypoGraphy variant="title"
-          style={{ fontSize: 24, fontWeight: 600, marginRight: 20 }}
+          <TypoGraphy variant="h1"
+          style={{ fontSize: 24, fontWeight: 500, marginRight: 20 }}
           >
             Search and Send!
           </TypoGraphy>

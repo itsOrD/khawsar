@@ -32,32 +32,45 @@ class Game extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.pokedexCheck = this.pokedexCheck.bind(this);
     this.oops = this.oops.bind(this);
-    this.wildPokemonAppeared = this.wildPokemonAppeared.bind(this);
+    this.wildPokemon = this.wildPokemon.bind(this);
+    this.compare = this.compare.bind(this);
   }
 
-  wildPokemonAppeared(data) {
+  compare() {
+    if (this.state.whoThat === this.state.userGuess) {
+      this.setState({
+        userCorrect: true
+      })
+    }
+  }
+
+  wildPokemon(data) {
     console.log('data on client side: ', data)
     this.setState({
       pokeData: data,
       whoThat: data.name,
       pokeImg: data.sprites.front_shiny
-    }, () => console.log(`whoThat?  Why its... ${this.state.whoThat.name}! ${this.state.pokeImg}`))
+    }, () => {
+      console.log(`whoThat?  Why its... ${this.state.whoThat}! ${this.state.pokeImg}`)
+      this.compare();
+    })
   }
 
-  // componentDidMount() {
-  //   this.wildPokemonAppeared(Math.floor(Math.random() * 807));
-  // }
+  componentDidMount() {
+    let randNum = Math.floor(Math.random() * 807);
+    console.log('randNum: ', randNum);
+    this.pokedexCheck(randNum);
+  }
 
   oops() {
-    alert(`Please try again. Professor Oak has added that Pokémon to the Pokédex yet it would seem...`)
+    alert(`Please try again. Professor Oak hasn't added that Pokémon to the Pokédex yet it would seem...`)
   }
 
-  pokedexCheck(pokeCheck) {
+  pokedexCheck(mysteryPokemon) {
     $.ajax({
       type: "GET",
-      url: "/api/find",
-      body: pokeCheck,
-      success: (data) => this.wildPokemonAppeared(data),
+      url: `/api/find/${mysteryPokemon}`,
+      success: (data) => this.wildPokemon(data),
       failure: () => oops(),
     })
   }
@@ -71,6 +84,7 @@ class Game extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log('userGuess: ', e.target.value)
     this.setState({
       pokeSearch: '',
       userGuessed: true,
@@ -84,9 +98,13 @@ class Game extends React.Component {
     return (
       <div>
         <Card>
-          <CardHeader title="Who's that Pokémon?!" />
+          <Typography variant="h3">
+            <CardHeader title="Who's that Pokémon?!"/>
+          </Typography>
           <Grid container justify="center">
-            <CardMedia image={pokeImg} style={{ height: 136, width: 111 }}></CardMedia>
+            <CardMedia image={pokeImg} style={{ height: 136, width: 111 }}>
+              <source media="(min-width: 600px)" srcSet={pokeImg} />
+            </CardMedia>
           </Grid>
           <CardContent>
             <form id="searchForm" onSubmit={handleSubmit}>
@@ -96,7 +114,7 @@ class Game extends React.Component {
                 label="pokeStart here!"
                 type="search"
                 variant="outlined"
-                helperText={`How about... ${randomPokemon}?`}
+                helperText={`Maybe its... ${randomPokemon}?`}
                 onChange={handleChange}
               />
               <Button 

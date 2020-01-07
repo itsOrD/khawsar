@@ -8,8 +8,9 @@ const search = (req, res) => {
   //   success: () => res.send(data),
   //   failure: () => res.sendStatus(404)
   // })
-  console.log('incoming request ---> ', req)
-  axios.get(`https://pokeapi.co/api/v2/pokemon-form/`)
+  console.log('incoming request Pokemon number ---> ', req.params.mysteryPokemon);
+  let pokeNum = req.params.mysteryPokemon;
+  axios.get(`https://pokeapi.co/api/v2/pokemon-form/${pokeNum}`)
     .then((res) => {
       console.log(res.data);
       let foundPokemon = res.data;
@@ -20,8 +21,7 @@ const search = (req, res) => {
       console.log(err);
       res.sendStatus(404);
     })
-  
-  
+
   // , (req, res) => {
   //   console.log('.......')
   //   if (err) {

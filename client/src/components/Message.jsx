@@ -25,7 +25,9 @@ class Message extends React.Component {
     const { message, phoneNumber } = this.state;
     return (
       <Card style={{ margin: 5 }}>
-        <CardHeader title="Text your friends for help!" />
+        <Typography variant="h3">
+          <CardHeader title="Text your friends for help!" />
+        </Typography>
         <CardContent>
           <TextField
             id="message"

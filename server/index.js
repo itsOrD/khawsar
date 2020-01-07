@@ -29,7 +29,7 @@ app.route('/pim/delete')
 	.delete(controller.deletePim);
 
 // api routes
-app.route('/api/find')
+app.route('/api/find/:mysteryPokemon')
 	.get(pokeApi.search);
 
 app.listen(PORT, () => 
