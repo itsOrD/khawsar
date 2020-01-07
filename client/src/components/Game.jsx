@@ -29,6 +29,7 @@ class Game extends React.Component {
       userGuess: '',
       userCorrect: '',
       encounters: 1,
+      correctGuesses: [],
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,6 +39,18 @@ class Game extends React.Component {
     this.compare = this.compare.bind(this);
     this.randomEncounter = this.randomEncounter.bind(this);
     this.addToPersonalPokedex = this.addToPersonalPokedex.bind(this);
+    this.fetchStored = this.fetchStored.bind(this);
+  }
+
+  fetchStored() {
+    $.ajax({
+      type: "GET",
+      url: "/pim/read",
+      success: (data) => this.setState({
+        correctGuesses: data
+      }),
+      failure: () => this.oops(),
+    })
   }
 
   addToPersonalPokedex(pData) {
@@ -45,7 +58,7 @@ class Game extends React.Component {
       type: "POST",
       url: "/pim/create",
       data: pData
-    })
+    }, this.fetchStored())
   }
 
   compare() {
@@ -117,7 +130,7 @@ class Game extends React.Component {
   };
 
   render() {
-    const { randomPokemon, pokeSearch, whoThat, pokeImg, userCorrect, userGuess, userGuessed, encounters, encounterCount } = this.state;
+    const { randomPokemon, pokeSearch, whoThat, pokeImg, userCorrect, userGuess, userGuessed, encounters, encounterCount, correctGuesses } = this.state;
     const { handleChange, handleSubmit, randomEncounter } = this;
     return (
       <div>
@@ -155,7 +168,7 @@ class Game extends React.Component {
           </CardContent>
         </Card>
         <Guess userGuessed={userGuessed} userGuess={userGuess} userCorrect={userCorrect} />
-        <Record />
+        <Record correctGuesses={correctGuesses} />
       </div>
     )
   }

@@ -6,13 +6,17 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
 const Record = (props) => {
-  // const { userGuess } = props;
+  const { correctGuesses } = props;
   return (
     <Card>
       <Typography variant="h3">
-        <CardHeader title="Guess record: " />
+        <CardHeader title="Correct guesses: " />
       </Typography>
-
+      <CardMedia>
+        {correctGuesses.map((pokemon, i) => {
+          return <source media="(min-width: 600px)" srcSet={pokemon.name} />
+        }))}
+      </CardMedia>
     </Card>
   );
 };
