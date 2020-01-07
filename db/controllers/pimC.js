@@ -15,13 +15,14 @@ const addPim = (req, res) => {
 };
 
 const findPim = (req, res) => {
-  Pim.find(data, (err, docs) => {
+  Model.Pim.find({}, (err, data) => {
     if (err) {
       console.error(err);
-      next(err);
-      // res.sendStatus(404);
+      // next(err);
+      res.sendStatus(404);
     } else {
-      res.send(docs)
+      console.log('DATA: ', data)
+      res.send(data);
     }
   });
 };

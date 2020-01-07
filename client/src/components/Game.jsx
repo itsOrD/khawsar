@@ -43,6 +43,7 @@ class Game extends React.Component {
   }
 
   fetchStored() {
+    console.log('fetching...');
     $.ajax({
       type: "GET",
       url: "/pim/read",
@@ -96,6 +97,7 @@ class Game extends React.Component {
 
   componentDidMount() {
     this.randomEncounter();
+    this.fetchStored();
   }
 
   oops() {
@@ -167,7 +169,7 @@ class Game extends React.Component {
             </form>
           </CardContent>
         </Card>
-        <Guess userGuessed={userGuessed} userGuess={userGuess} userCorrect={userCorrect} />
+        <Guess userGuessed={userGuessed} userGuess={userGuess} userCorrect={userCorrect} randomEncounter={randomEncounter} />
         <Record correctGuesses={correctGuesses} />
       </div>
     )

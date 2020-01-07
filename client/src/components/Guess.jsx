@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
 const Guess = (props) => {
-  const { userGuessed, userGuess, userCorrect } = props;
+  const { userGuessed, userGuess, userCorrect, randomEncounter } = props;
 	return (
     <Card>
       {
@@ -29,6 +29,7 @@ const Guess = (props) => {
                   variant="contained"
                   color="secondary"
                   style={{ marginTop: 20 }}
+                  onClick={() => randomEncounter()}
                 >Try again!</Button>
               )
             }
