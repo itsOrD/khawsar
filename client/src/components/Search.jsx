@@ -19,17 +19,21 @@ class Search extends React.Component {
       pokeSearch: '',
       randomPokemon: 'Charmander',
       whoThat: [],
+      pokeImg: '',
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.pokedex = this.pokedex.bind(this);
     this.oops = this.oops.bind(this);
+    this.wildPokemonAppeared = this.wildPokemonAppeared.bind(this);
   }
 
   wildPokemonAppeared(data) {
+    console.log('data on client side: ', data)
     this.setState({
-      whoThat: data.image
-    }, () => console.log('whoThat?  Why its...', data.name))
+      whoThat: data,
+      pokeImg: data.sprites.front_shiny
+    }, () => console.log(`whoThat?  Why its... ${this.state.whoThat.name}! ${this.state.pokeImg}`))
   }
 
   oops() {
@@ -39,8 +43,9 @@ class Search extends React.Component {
   pokedex(pocketMonster) {
     $.ajax({
       type: "GET",
-      data: pocketMonster,
-      success: (data) => wildPokemonAppeared(data),
+      url: "/api/find",
+      body: pocketMonster,
+      success: (data) => this.wildPokemonAppeared(data),
       failure: () => oops(),
     })
   }
@@ -62,12 +67,14 @@ class Search extends React.Component {
   };
 
   render() {
-    const { randomPokemon, pokeSearch, whoThat } = this.state;
+    const { randomPokemon, pokeSearch, whoThat, pokeImg } = this.state;
     const { handleChange, handleSubmit } = this;
     return (
       <Card>
         <CardHeader title="Who's that pokemon?!" />
-        <CardMedia img={whoThat} />
+        <div>
+        <CardMedia image={pokeImg} style={{ height: 100, width: 100 }}></CardMedia>
+        </div>
         <CardContent>
         <form id="searchForm" onSubmit={handleSubmit}>
           <TextField 

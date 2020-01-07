@@ -1,6 +1,6 @@
 const Pim = require('../models/pim.js');
 
-const addPim = (data) => {
+const addPim = (req, res) => {
   Pim.create(data, (err) => {
     if (err) {
       console.error(err);
@@ -12,7 +12,7 @@ const addPim = (data) => {
   });
 };
 
-const findPim = (data) => {
+const findPim = (req, res) => {
   Pim.find(data, (err, docs) => {
     if (err) {
       console.error(err);
@@ -24,7 +24,7 @@ const findPim = (data) => {
   });
 };
 
-const editPim = (data) => {
+const editPim = (req, res) => {
   Pim.findOneAndUpdate(data, /* update, */ (err) => {
     if (err) {
       console.error(err);
@@ -36,7 +36,7 @@ const editPim = (data) => {
   });
 };
 
-const deletePim = (data) => {
+const deletePim = (req, res) => {
   Pim.deleteOne(data, (err) => {
     if (err) {
       console.error(err);
