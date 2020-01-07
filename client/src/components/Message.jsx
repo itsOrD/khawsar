@@ -8,6 +8,9 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import $ from 'jquery';
+import Grid from '@material-ui/core/Grid';
+import TextsmsTwoToneIcon from '@material-ui/icons/TextsmsTwoTone';
+
 class Message extends React.Component {
   constructor(props) {
     super(props);
@@ -31,12 +34,12 @@ class Message extends React.Component {
             multiline
             rows="4"
           />
-          <Input
-            id="phoneNumber"
-            value={phoneNumber}
-            label="Send to what #?"
-            style={{ marginTop: 40, marginLeft: 10 }}
-          />
+              <TextsmsTwoToneIcon style={{ marginTop: 21 }} />
+              <TextField
+                id="input-with-icon-grid"
+                label=" What's their 📞#?"
+                style={{ marginLeft: 5 }}
+              />
         </CardContent>
         <Button
           variant="contained"
