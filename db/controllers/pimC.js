@@ -1,7 +1,9 @@
-const Pim = require('../models/pim.js');
+const Model = require('../models/pim.js');
 
 const addPim = (req, res) => {
-  Pim.create(data, (err) => {
+  let info = req.body;
+  let p = new Model.Pim({ name: info.name, image: info.sprites.front_shiny })
+  p.save((err, data) => {
     if (err) {
       console.error(err);
       res.sendStatus(500);

@@ -10,7 +10,7 @@ const Record = (props) => {
   return (
     <Card>
       <Typography variant="h3">
-        <CardHeader title="Your guess record thus far:" />
+        <CardHeader title="Guess record: " />
       </Typography>
 
     </Card>

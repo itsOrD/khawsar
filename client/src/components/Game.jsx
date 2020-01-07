@@ -79,7 +79,6 @@ class Game extends React.Component {
     let randNum = Math.floor(Math.random() * 807);
     console.log('randNum: ', randNum);
     this.pokedexCheck(randNum);
-
   }
 
   componentDidMount() {

@@ -14,8 +14,7 @@ const NewEncounter = (props) => {
   return (
     <Badge 
       badgeContent={encounters}
-      color={"secondary"} 
-      fullWidth
+      color={"secondary"}
       style={{ marginLeft: 80, marginTop: 40 }}
     >
       <Button 
