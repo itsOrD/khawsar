@@ -22,7 +22,7 @@ const Guess = (props) => {
                 <Button 
                   variant="contained"
                   color="primary"
-                  style={{ margin: 10 }}
+                  style={{ marginTop: 20 }}
                 >Correct!</Button>
               ) : (
                 <Button 

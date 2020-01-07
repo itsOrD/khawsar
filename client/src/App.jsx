@@ -21,12 +21,12 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      placeholder: '',
+      encounters: 1,
     }
   }
 
   render() {
-    
+    const { encounters } = this.state;
     return (
       <div>
         <Title />
