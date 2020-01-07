@@ -23,18 +23,16 @@ class App extends React.Component {
     this.state = {
       placeholder: '',
     }
-  //this...
   }
 
-  //methods...
 
   render() {
     
     return (
       <div>
         <Title />
-        <Message />
         <Search />
+        <Message />
       </div>
     )
   }

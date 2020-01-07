@@ -34,12 +34,20 @@ const Guess = (props) => {
             }
           </Grid>
         ) : (
-          <TextField
-            variant="filled"
-            color="secondary"
-            value={`Fill out your guess...`}
-            style={{ marginLeft: 20, marginBottom: 5, marginTop: 5 }}
-          />
+          <Grid>
+            <TextField
+              variant="filled"
+              color="secondary"
+              value={`Input your guess above`}
+              style={{ marginLeft: 20, marginBottom: 5, marginTop: 5 }}
+            />
+            <TextField
+              variant="filled"
+              color="secondary"
+              value={` ..awaiting your guess.. `}
+              style={{ marginLeft: 20, marginBottom: 5, marginTop: 5 }}
+            />
+          </Grid>
         )
       }
     </Card>
