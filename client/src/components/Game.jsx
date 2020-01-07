@@ -37,14 +37,23 @@ class Game extends React.Component {
     this.wildPokemon = this.wildPokemon.bind(this);
     this.compare = this.compare.bind(this);
     this.randomEncounter = this.randomEncounter.bind(this);
+    this.addToPersonalPokedex = this.addToPersonalPokedex.bind(this);
+  }
+
+  addToPersonalPokedex(pData) {
+    $.ajax({
+      type: "POST",
+      url: "/pim/create",
+      data: pData
+    })
   }
 
   compare() {
     if (this.state.whoThat === this.state.userGuess) {
       this.setState({
         userCorrect: true
-      })
-    }
+      }, this.addToPersonalPokedex(this.state.pokeData)
+      )}
     if (this.state.whoThat !== this.state.userGuess) {
       this.setState({
         userCorrect: false
