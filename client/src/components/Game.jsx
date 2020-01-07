@@ -30,6 +30,7 @@ class Game extends React.Component {
       userCorrect: '',
       encounters: 1,
       correctGuesses: [],
+      mostRecentCorrect: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -63,9 +64,11 @@ class Game extends React.Component {
   }
 
   compare() {
-    if (this.state.whoThat === this.state.userGuess) {
+    let userInput = this.state.userGuess
+    if (this.state.whoThat === userInput) {
       this.setState({
-        userCorrect: true
+        userCorrect: true,
+        mostRecentCorrect: userInput
       }, this.addToPersonalPokedex(this.state.pokeData)
       )}
     if (this.state.whoThat !== this.state.userGuess) {
@@ -132,7 +135,7 @@ class Game extends React.Component {
   };
 
   render() {
-    const { randomPokemon, pokeSearch, whoThat, pokeImg, userCorrect, userGuess, userGuessed, encounters, encounterCount, correctGuesses } = this.state;
+    const { randomPokemon, pokeSearch, whoThat, pokeImg, userCorrect, userGuess, userGuessed, encounters, encounterCount, correctGuesses, mostRecentCorrect } = this.state;
     const { handleChange, handleSubmit, randomEncounter } = this;
     return (
       <div>
@@ -170,7 +173,7 @@ class Game extends React.Component {
           </CardContent>
         </Card>
         <Guess userGuessed={userGuessed} userGuess={userGuess} userCorrect={userCorrect} randomEncounter={randomEncounter} />
-        <Record correctGuesses={correctGuesses} />
+        <Record correctGuesses={correctGuesses} mostRecentCorrect={mostRecentCorrect} />
       </div>
     )
   }
