@@ -12,6 +12,7 @@ const Record = (props) => {
   const { correctGuesses, mostRecentCorrect } = props;
 
   const highestIndex = correctGuesses.length - 1;
+  // const correctGuess = correctGuesses[0].name
   const correctGuessStr = String(JSON.stringify(correctGuesses[highestIndex]));
   const mostRecentFront = correctGuessStr.slice(34);
   // const mostRecent = mostRecentFront.split(`","image`)

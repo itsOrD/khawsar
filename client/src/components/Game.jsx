@@ -48,9 +48,11 @@ class Game extends React.Component {
     $.ajax({
       type: "GET",
       url: "/pim/read",
-      success: (data) => this.setState({
+      success: (data) => {
+        console.log(typeof data, data)
+        this.setState({
         correctGuesses: data
-      }),
+      })},
       failure: () => this.oops(),
     })
   }

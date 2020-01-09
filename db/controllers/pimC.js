@@ -28,7 +28,9 @@ const findPim = (req, res) => {
 };
 
 const editPim = (req, res) => {
-  Pim.findOneAndUpdate(data, /* update, */ (err) => {
+  let info = req.body;
+  let p = new Model.Pim({ name: info.name })
+  p.findOneAndUpdate({}, /* update, */ (err) => {
     if (err) {
       console.error(err);
       next(err);
@@ -40,7 +42,8 @@ const editPim = (req, res) => {
 };
 
 const deletePim = (req, res) => {
-  Pim.deleteOne(data, (err) => {
+  let info = req.body._id;
+  Pim.deleteOne(info, (err) => {
     if (err) {
       console.error(err);
       next(err);

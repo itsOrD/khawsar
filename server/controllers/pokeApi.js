@@ -1,13 +1,7 @@
 const axios = require('axios');
 
 const search = (req, res) => {
-  // console.log('REQ.BODY: ', req)
-	// axios({
-  //   type: "GET",
-  //   url: `https://pokeapi.co/api/v2/pokemon-form/${req.body}`,
-  //   success: () => res.send(data),
-  //   failure: () => res.sendStatus(404)
-  // })
+
   console.log('incoming request Pokemon number ---> ', req.params.mysteryPokemon);
   let pokeNum = req.params.mysteryPokemon;
   axios.get(`https://pokeapi.co/api/v2/pokemon-form/${pokeNum}`)
