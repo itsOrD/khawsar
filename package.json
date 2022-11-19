@@ -30,6 +30,6 @@
     "express": "^4.17.1",
     "mongoose": "^5.8.4",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.12"
   }
 }
